@@ -3,7 +3,7 @@
 ## .htaccess
 .htaccess に環境変数を設定する
 ```
-SetEnv SECRET hogehoge # github webhook の sercret
+SetEnv SECRET hogehoge # github webhook の sercretに入れた値
 SetEnv MODE normal # debug にするとdebug モード
 ```
 ## apacheユーザでPHPからsudo権限でシェルを叩く
@@ -16,7 +16,7 @@ $ sudo visudo
 ```
 ```
 apache ALL=(deployer) NOPASSWD: /bin/sh # deployer の権限でshコマンドを実行する時
-Defaults:apache !requiretty # apacheだけ端末デバイス以外からのアクセスを許す
+Defaults:apache !requiretty # apacheだけ端末デバイス(Terminal)以外からのアクセスを許す
 ```
 
 ## pull.sh
