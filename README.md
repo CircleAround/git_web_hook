@@ -3,7 +3,7 @@
 ## .htaccess
 .htaccess に環境変数を設定する
 ```
-SetEnv SECRET hogehoge # github webhook の sercretに入れた値
+SetEnv SECRET hogehoge # github webhook の secretに入れた値
 SetEnv MODE normal # debug にするとdebug モード
 ```
 ## apacheユーザでPHPからsudo権限でシェルを叩く
