@@ -3,9 +3,13 @@ $hookSecret = $_SERVER['SECRET'];
 $mode = $_SERVER['MODE'];
 
 function pullMaster($payload){
-  if ($payload['ref'] === 'refs/heads/master'){
-    `sudo -u deployer sh /home/deployer/pull.sh`;
-    file_put_contents(dirname(__FILE__).'/hook.log', date("[Y-m-d H:i:s]")." ".$_SERVER['REMOTE_ADDR']." git pulled: ".$payload['head_commit']['message']."\n", FILE_APPEND|LOCK_EX);
+  if ($payload['ref'] === "refs/heads/$_SERVER[BRANCH_NAME]"){
+    `$_SERVER[COMMAND]`;
+    file_put_contents(
+      dirname(__FILE__).'/hook.log',
+      date("[Y-m-d H:i:s]")." ".$_SERVER['REMOTE_ADDR']." git pulled: ".$payload['head_commit']['message']."\n",
+      FILE_APPEND|LOCK_EX
+    );
   }
 }
 
@@ -77,7 +81,7 @@ function triggerEvent($payload){
   	default:
   		header('HTTP/1.0 404 Not Found');
   		echo "Event:$_SERVER[HTTP_X_GITHUB_EVENT] Payload:\n";
-  		print_r($payload); # For debug only. Can be found in GitHub hook log.
+  		// print_r($payload); # For debug only. Can be found in GitHub hook log.
   		die();
   }
 }
@@ -85,8 +89,12 @@ function triggerEvent($payload){
 switch($mode){
   case 'debug':
     echo "debug mode";
-    `sudo -u deployer sh /home/deployer/test1.sh`;
-    file_put_contents(dirname(__FILE__).'/hook.log', date("[Y-m-d H:i:s]")." ".$_SERVER['REMOTE_ADDR']." git pulled: debug mode\n", FILE_APPEND|LOCK_EX);
+    `$_SERVER[DEBUG_COMMAND]`;
+    file_put_contents(
+      dirname(__FILE__).'/hook.log',
+      date("[Y-m-d H:i:s]")." ".$_SERVER['REMOTE_ADDR']." git pulled: debug mode\n",
+      FILE_APPEND|LOCK_EX
+    );
     break;
   default:
     checkRequest();
