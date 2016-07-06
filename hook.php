@@ -3,10 +3,11 @@ $hookSecret = $_SERVER['SECRET'];
 $mode = $_SERVER['MODE'];
 
 function pullMaster($payload){
-  if ($payload['ref'] === 'refs/heads/master'){
-    `sudo -u deployer sh /home/deployer/pull.sh`;
-    file_put_contents(dirname(__FILE__).'/hook.log', date("[Y-m-d H:i:s]")." ".$_SERVER['REMOTE_ADDR']." git pulled: ".$payload['head_commit']['message']."\n", FILE_APPEND|LOCK_EX);
-  }
+  print_r($payload);
+  // if ($payload['ref'] === 'refs/heads/master'){
+  //   `sudo -u deployer sh /home/deployer/pull.sh`;
+  //   file_put_contents(dirname(__FILE__).'/hook.log', date("[Y-m-d H:i:s]")." ".$_SERVER['REMOTE_ADDR']." git pulled: ".$payload['head_commit']['message']."\n", FILE_APPEND|LOCK_EX);
+  // }
 }
 
 set_error_handler(function($severity, $message, $file, $line) {
