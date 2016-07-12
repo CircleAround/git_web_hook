@@ -5,6 +5,9 @@
 ```
 SetEnv SECRET hogehoge # github webhook の secretに入れた値
 SetEnv MODE normal # debug にするとdebug モード
+SetEnv BRANCH_NAME master # push先のブランチ名(基本はmaster)
+SetEnv COMMAND "sudo -u hoge sh fuga.sh" webhookで実行したいコマンド
+SetEnv DEBUG_COMMAND "sudo -u hoge sh fuga1.sh" debug時に実行したいコマンド
 ```
 ## apacheユーザでPHPからsudo権限でシェルを叩く
 git pull 専用ユーザー deployer(名前は任意)を作成している前提で書きます。
