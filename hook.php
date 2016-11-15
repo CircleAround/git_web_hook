@@ -4,7 +4,7 @@ $mode = $_SERVER['MODE'];
 
 function pullMaster($payload){
   if ($payload['ref'] === 'refs/heads/master'){
-    `su www-data -c 'sh /home/www-data/pull.sh'`;
+    `sh /home/www-data/pull.sh`;
     file_put_contents(dirname(__FILE__).'/hook.log', date("[Y-m-d H:i:s]")." ".$_SERVER['REMOTE_ADDR']." git pulled: ".$payload['head_commit']['message']."\n", FILE_APPEND|LOCK_EX);
   }
 }
